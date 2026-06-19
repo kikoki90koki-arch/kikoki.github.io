@@ -9,7 +9,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
     <style>
-        /* 1. 기본 초기화 및 공통 스타일 */
+        /* 기본 초기화 */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,10 +21,10 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background-color: #ffffff;
+            background-color: #f4f7f4;
         }
 
-        /* 공통 상단 내비게이션 바 (GNB) */
+        /* 상단 내비게이션 바 */
         header {
             width: 100%;
             height: 70px;
@@ -37,21 +37,19 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            border-bottom: 1px solid #e5e5e5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 800;
-            color: #219b56;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1b9552;
             cursor: pointer;
-            letter-spacing: -1px;
         }
 
         nav {
             display: flex;
-            height: 100%;
-            align-items: center;
+            gap: 15px;
         }
 
         nav a {
@@ -59,18 +57,14 @@
             color: #333333;
             font-size: 16px;
             font-weight: bold;
-            padding: 0 25px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
 
-        /* 활성화된 탭 스타일: 상단 이미지와 동일하게 상단 바 및 배경색 채우기 */
-        nav a.active {
-            background-color: #219b56;
+        nav a.active, nav a:hover {
+            background-color: #1b9552;
             color: #ffffff;
         }
 
@@ -78,17 +72,11 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            font-size: 20px;
+            color: #555;
         }
 
-        .header-icons .icon-btn {
-            font-size: 24px;
-            color: #79a089;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        /* 단일 페이지 내 전환 섹션 제어 */
+        /* 섹션 제어 기본값 (display: none 처리하되 active 시 노출) */
         .page-section {
             width: 100%;
             min-height: 100vh;
@@ -98,82 +86,42 @@
         }
 
         .page-section.active {
-            display: block;
+            display: block !important;
         }
 
         /* ----------------------------------------------------
-           [Page 1] 메인화면 디자인 구현
+           [Page 1] 메인화면 기본 복원
         ---------------------------------------------------- */
         #main-page {
-            /* 배경 이미지를 첨부해주신 메인화면과 일치하도록 세팅 */
-            background: url('KakaoTalk_20260529_164502496_01.jpg') center/cover no-repeat;
-            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('KakaoTalk_20260529_164502496_01.jpg') center/cover no-repeat;
+            background-color: #333; /* 이미지 로드 실패 시 백업 배경색 */
+            color: #ffffff;
+            text-align: center;
         }
         
-        #main-page::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
-
-        /* 둥근 아치형 마스크 레이어 */
-        .main-arch-overlay {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1100px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            border-bottom-left-radius: 500px;
-            border-bottom-right-radius: 500px;
-            z-index: 2;
-            display: flex;
+        #main-page.active {
+            display: flex !important;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #ffffff;
-            text-align: center;
-            padding: 0 20px;
         }
 
-        /* 메인 꾸밈 나뭇잎 이미지 배치 */
-        .leaf-left {
-            position: absolute;
-            left: 40px;
-            top: 100px;
-            width: 120px;
-            opacity: 0.9;
-            z-index: 3;
-        }
-        .leaf-left-bottom {
-            position: absolute;
-            left: 30px;
-            bottom: 40px;
-            width: 140px;
-            opacity: 0.9;
-            z-index: 3;
-        }
-        .leaf-right {
-            position: absolute;
-            right: 40px;
-            top: 100px;
-            width: 120px;
-            opacity: 0.9;
-            z-index: 3;
-        }
-
-        .char-lion-main {
-            position: absolute;
-            right: 8%;
-            bottom: 5%;
-            width: 160px;
-            z-index: 3;
+        .main-container {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 10;
         }
 
         .main-subtitle {
             font-size: 18px;
-            color:
+            color: #8ae6b1;
+            margin-bottom: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .main-title {
+            font-size: 46px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px
