@@ -21,10 +21,10 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background-color: #f4f7f4;
+            background-color: #ffffff;
         }
 
-        /* 공통 상단 내비게이션 바 (제공 이미지의 상단 GNB 레이아웃 반영) */
+        /* 공통 상단 내비게이션 바 (GNB) */
         header {
             width: 100%;
             height: 70px;
@@ -37,19 +37,21 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1b9552;
+            font-size: 28px;
+            font-weight: 800;
+            color: #219b56;
             cursor: pointer;
+            letter-spacing: -1px;
         }
 
         nav {
             display: flex;
-            gap: 15px;
+            height: 100%;
+            align-items: center;
         }
 
         nav a {
@@ -57,15 +59,18 @@
             color: #333333;
             font-size: 16px;
             font-weight: bold;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            padding: 0 25px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
             cursor: pointer;
+            position: relative;
         }
 
-        /* 현재 활성화된 탭 스타일 마킹 효과 */
-        nav a.active, nav a:hover {
-            background-color: #1b9552;
+        /* 활성화된 탭 스타일: 상단 이미지와 동일하게 상단 바 및 배경색 채우기 */
+        nav a.active {
+            background-color: #219b56;
             color: #ffffff;
         }
 
@@ -73,8 +78,14 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            font-size: 20px;
-            color: #555;
+        }
+
+        .header-icons .icon-btn {
+            font-size: 24px;
+            color: #79a089;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         /* 단일 페이지 내 전환 섹션 제어 */
@@ -86,470 +97,83 @@
             position: relative;
         }
 
-        /* 탭 이동 시 자연스러운 등장 모션(FadeIn) 추가 */
         .page-section.active {
             display: block;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ----------------------------------------------------
-           [Page 1] 메인화면.jpg 스타일 구현
+           [Page 1] 메인화면 디자인 구현
         ---------------------------------------------------- */
         #main-page {
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1596120244123-cc9326793433?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            display: none;
+            /* 배경 이미지를 첨부해주신 메인화면과 일치하도록 세팅 */
+            background: url('KakaoTalk_20260529_164502496_01.jpg') center/cover no-repeat;
+            position: relative;
+        }
+        
+        #main-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* 둥근 아치형 마스크 레이어 */
+        .main-arch-overlay {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            border-bottom-left-radius: 500px;
+            border-bottom-right-radius: 500px;
+            z-index: 2;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #ffffff;
             text-align: center;
-        }
-        
-        #main-page.active {
-            display: flex;
+            padding: 0 20px;
         }
 
-        .main-container {
-            max-width: 800px;
-            padding: 20px;
+        /* 메인 꾸밈 나뭇잎 이미지 배치 */
+        .leaf-left {
+            position: absolute;
+            left: 40px;
+            top: 100px;
+            width: 120px;
+            opacity: 0.9;
+            z-index: 3;
+        }
+        .leaf-left-bottom {
+            position: absolute;
+            left: 30px;
+            bottom: 40px;
+            width: 140px;
+            opacity: 0.9;
+            z-index: 3;
+        }
+        .leaf-right {
+            position: absolute;
+            right: 40px;
+            top: 100px;
+            width: 120px;
+            opacity: 0.9;
+            z-index: 3;
+        }
+
+        .char-lion-main {
+            position: absolute;
+            right: 8%;
+            bottom: 5%;
+            width: 160px;
+            z-index: 3;
         }
 
         .main-subtitle {
             font-size: 18px;
-            color: #8ae6b1;
-            margin-bottom: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .main-title {
-            font-size: 46px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .main-desc {
-            font-size: 22px;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-
-        .search-bar-container {
-            width: 100%;
-            max-width: 600px;
-            position: relative;
-            margin: 0 auto;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 16px 60px 16px 24px;
-            border-radius: 50px;
-            border: none;
-            font-size: 16px;
-            outline: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .search-bar:focus {
-            transform: scale(1.02);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #1b9552;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* ----------------------------------------------------
-           [Page 2] 공원안내.jpg 스타일 구현
-        ---------------------------------------------------- */
-        #info-page {
-            background-color: #e2ede4;
-            padding: 110px 40px 60px 40px;
-        }
-
-        .info-cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 50px auto;
-        }
-
-        /* 카드 컴포넌트에 마우스 호버(Hover) 시 위로 떠오르는 모션 추가 */
-        .info-card {
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-            border: 4px solid #ffcc00; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .card-img-placeholder {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card-1-img { background-image: url('https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=600&q=80'); }
-        .card-2-img { background-image: url('https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=600&q=80'); }
-        .card-3-img { background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80'); }
-
-        .card-body {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card-title-box {
-            background: #ffffff;
-            padding: 8px 20px;
-            border-radius: 30px;
-            display: inline-block;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-top: -38px;
-            position: relative;
-            font-weight: bold;
-            color: #333;
-            border: 2px solid #ffcc00;
-        }
-
-        .card-text {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-            text-align: left;
-            padding: 12px;
-            background: #fafafa;
-            border-radius: 10px;
-        }
-
-        /* 하단 입장 안내 / 시설 안내 / 이용 수칙 레이아웃 디자인 */
-        .info-bottom-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .info-box {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            text-align: center;
-        }
-
-        .box-badge {
-            background-color: #1b9552;
-            color: white;
-            padding: 6px 20px;
-            border-radius: 20px;
-            display: inline-block;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .box-list {
-            list-style: none;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .box-list li {
-            margin: 10px 0;
-            font-size: 15px;
-            color: #444;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .box-list li::before {
-            content: "•";
-            color: #1b9552;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* ----------------------------------------------------
-           [Page 3] 오시는 길 (지도).jpg -> VR 360 파노라마 화면
-        ---------------------------------------------------- */
-        #vr-page {
-            background-color: #000000;
-            height: 100vh;
-            padding-top: 70px;
-        }
-
-        #panorama-viewer {
-            width: 100%;
-            height: calc(100vh - 70px);
-        }
-
-        /* ----------------------------------------------------
-           [Page 4] 기획및 설계.jpg 스타일 구현
-        ---------------------------------------------------- */
-        #design-page {
-            background-color: #f0f7f1;
-            padding: 110px 20px 60px 20px;
-        }
-
-        .design-inner {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .design-table {
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 60px 1fr;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .table-header {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            padding: 14px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-        }
-
-        .header-problem { background-color: #e04f33; }
-        .header-solution { background-color: #3fa967; }
-
-        .row-item {
-            background: white;
-            padding: 16px 20px;
-            border-radius: 30px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            border: 1px solid #e0efe4;
-        }
-
-        /* 리스트에 마우스 오버 시 미세하게 확대되는 인터랙션 모션 */
-        .row-item:hover {
-            transform: scale(1.015);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .problem-item { border-left: 6px solid #e04f33; }
-        .solution-item { border-left: 6px solid #3fa967; }
-
-        /* 화살표 맥박(Pulse) 모션 추가 */
-        .arrow-item {
-            text-align: center;
-            font-size: 22px;
-            color: #3fa967;
-            font-weight: bold;
-            animation: arrowPulse 1.8s infinite ease-in-out;
-        }
-
-        @keyframes arrowPulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.25); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo" onclick="navigateTo('main-page')">달성공원</div>
-        <nav>
-            <a id="nav-main-page" class="active" onclick="navigateTo('main-page')">메인홈</a>
-            <a id="nav-info-page" onclick="navigateTo('info-page')">공원안내</a>
-            <a id="nav-vr-page" onclick="navigateTo('vr-page')">VR</a>
-            <a id="nav-design-page" onclick="navigateTo('design-page')">기획 및 설계</a>
-        </nav>
-        <div class="header-icons">
-            <span>👤</span>
-            <span>☰</span>
-        </div>
-    </header>
-
-    <section id="main-page" class="page-section active">
-        <div class="main-container">
-            <p class="main-subtitle">대구광역시의 오랜 전통이 담겨있는</p>
-            <h1 class="main-title">대구 달성공원</h1>
-            <p class="main-desc">모두와 함께 쉬는 공간</p>
-            <div class="search-bar-container">
-                <input type="text" class="search-bar" placeholder="시설 및 정보 검색...">
-                <span class="search-icon">🔍</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="info-page" class="page-section">
-        <div class="info-cards-container">
-            <div class="info-card">
-                <div class="card-img-placeholder card-1-img"></div>
-                <div class="card-body">
-                    <div class="card-title-box">달성공원의 동물 🐾</div>
-                    <div class="card-text">
-                        • 봄/가을 (3-4월, 9-10월) : 10:00 ~ 18:00<br>
-                        • 여름 (5-8월) : 10:00 ~ 19:00<br>
-                        • 겨울 (11-2월) : 10:00 ~ 17:00 [호랑이, 사자 외]
-                    </div>
-                </div>
-            </div>
-            <div class="info-card">
-                <div class="card-img-placeholder card-2-img"></div>
-                <div class="card-body">
-                    <div class="card-title-box">이용시간 🕒</div>
-                    <div class="card-text">
-                        • 하절기 (3-10월) : 05:00 ~ 21:00<br>
-                        • 동절기 (11-2월) : 05:00 ~ 20:00<br>
-                        • 동물원 관람 : 10:00 ~ 17:00
-                    </div>
-                </div>
-            </div>
-            <div class="info-card">
-                <div class="card-img-placeholder card-3-img"></div>
-                <div class="card-body">
-                    <div class="card-title-box">오시는 길 📍</div>
-                    <div class="card-text">
-                        • 주소 : 대구광역시 중구 달성공원로 35<br>
-                        • 대중교통 및 주차 안내<br>
-                        • 버튼 → [자세히 보기]
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-bottom-container">
-            <div class="info-box">
-                <div class="box-badge">입장 안내</div>
-                <ul class="box-list">
-                    <li>반려동물 출입 제한</li>
-                    <li>입장료 무료</li>
-                    <li>연중무휴</li>
-                </ul>
-            </div>
-            <div class="info-box">
-                <div class="box-badge">시설 안내</div>
-                <ul class="box-list">
-                    <li>역사관 / 동물원</li>
-                    <li>놀이터 / 쉼터</li>
-                </ul>
-            </div>
-            <div class="info-box">
-                <div class="box-badge">이용 수칙</div>
-                <ul class="box-list">
-                    <li>쓰레기 무단 투기 금지</li>
-                    <li>동물 먹이 주기 금지</li>
-                    <li>시설물 훼손 금지</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="vr-page" class="page-section">
-        <div id="panorama-viewer"></div>
-    </section>
-
-    <section id="design-page" class="page-section">
-        <div class="design-inner">
-            <div style="display: grid; grid-template-columns: 1fr 60px 1fr; gap: 15px; margin-bottom: 10px;">
-                <div class="table-header header-problem">문제점</div>
-                <div></div>
-                <div class="table-header header-solution">해결방안</div>
-            </div>
-            
-            <div class="design-table">
-                <div class="row-item problem-item">동물 사육환경 노후화: 사육환경 악화</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">자연물을 활용해 행동 풍부화</div>
-
-                <div class="row-item problem-item">공원과 동물의 정체성 혼란</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">생태공간을 분리한 테마공원으로 브랜딩</div>
-
-                <div class="row-item problem-item">휴게공간, 안내 시스템의 노후화</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">유니버셜 디자인을 적용한 편의시설 리모델링</div>
-
-                <div class="row-item problem-item">생태, 교육 컨텐츠 부족</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">먹이를 줄 수 있는 체험 교육공간 신설</div>
-
-                <div class="row-item problem-item">접근성(편의성) 개선</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">휠체어 대여시스템 스마트화: 편의성 극대화</div>
-
-                <div class="row-item problem-item">관람 동선 효율저하</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">스토리텔링형 원웨이 관람환경 조성</div>
-
-                <div class="row-item problem-item">계절 대응 부족</div>
-                <div class="arrow-item">➔</div>
-                <div class="row-item solution-item">쉼터, 쿨링포그를 설치: 사육장 내 풀장 설치</div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // 1. 단일 페이지 어플리케이션(SPA) 탭 전환 로직
-        function navigateTo(sectionId) {
-            document.querySelectorAll('.page-section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            const targetSection = document.getElementById(sectionId);
-            if(targetSection) targetSection.classList.add('active');
-            
-            const targetLink = document.getElementById('nav-' + sectionId);
-            if(targetLink) targetLink.classList.add('active');
-
-            // VR 탭 선택 시 모듈 동적 로드 트리거
-            if(sectionId === 'vr-page') {
-                setTimeout(initVRViewer, 100);
-            }
-        }
-
-        // 2. VR 360도 파노라마 뷰어 연동 함수
-        let vrViewerInstance = null;
-        function initVRViewer() {
-            if (!vrViewerInstance) {
-                // 초보자 작동 테스트 목적의 오픈소스 검증용 360도 파노라마 샘플 소스를 바인딩해 드렸습니다.
-                vrViewerInstance = pannellum.viewer('panorama-viewer', {
-                    "type": "equirectangular",
-                    "panorama": "https://pannellum.org/images/alma.jpg",
-                    "autoLoad": true,
-                    "compass": false
-                });
-            }
-        }
-    </script>
-</body>
-</html>
+            color:
